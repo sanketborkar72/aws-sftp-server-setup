@@ -4,7 +4,7 @@
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![SSH](https://img.shields.io/badge/Protocol-SFTP-blue?style=for-the-badge)
 
-> A complete, step-by-step manual setup guide to deploy a secure, production-ready SFTP server on an AWS EC2 instance. This setup uses a Chroot Jail to ensure users cannot escape their designated folders.
+> A complete, step-by-step manual setup guide to deploy a secure, production-ready SFTP server on an AWS EC2 instance.
 
 ---
 
