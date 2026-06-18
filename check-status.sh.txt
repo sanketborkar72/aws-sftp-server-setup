@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Checking SSH Service:"
+sudo systemctl status ssh --no-pager | grep "Active:"
+echo ""
+echo "Checking SFTP User:"
+getent passwd SFTP
+echo ""
+echo "Checking Port 22 Firewall:"
+sudo ufw status | grep 22

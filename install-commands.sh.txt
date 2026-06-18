@@ -1,0 +1,32 @@
+#!/bin/bash
+# Full Installation Script for AWS SFTP
+
+sudo apt update
+sudo apt upgrade -y
+sudo apt install openssh-server -y
+sudo systemctl start ssh
+sudo systemctl enable ssh
+sudo useradd -m -s /usr/sbin/nologin SFTP
+echo "SFTP:xyz@123" | sudo chpasswd
+sudo mkdir -p /sftp/SFTP/data
+sudo chown root:root /sftp
+sudo chmod 755 /sftp
+sudo chown root:root /sftp/SFTP
+sudo chmod 755 /sftp/SFTP
+sudo chown SFTP:SFTP /sftp/SFTP/data
+sudo chmod 755 /sftp/SFTP/data
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
+sudo sed -i 's/Subsystem sftp \/usr\/lib\/openssh\/sftp-server/Subsystem sftp internal-sftp/' /etc/ssh/sshd_config
+echo "
+Match User SFTP
+    ChrootDirectory /sftp/SFTP
+    ForceCommand internal-sftp
+    X11Forwarding no
+    AllowTcpForwarding no
+    PermitTTY no
+    PasswordAuthentication yes
+" | sudo tee -a /etc/ssh/sshd_config
+sudo systemctl restart ssh
+sudo ufw allow 22/tcp
+sudo ufw enable
+echo "SFTP Setup Complete!"
